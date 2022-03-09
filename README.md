@@ -1,1 +1,3 @@
-Does this happen everytime I attmept to merge? Will I need to delete the syntax and edit them myself? I assumed it would just mash them together.
+*github resources for K12 education data*
+
+I'm very excited to learn more about github and how it can help me in my goals of achieving better outcomes for K12 students using the wealth of **available** data.
