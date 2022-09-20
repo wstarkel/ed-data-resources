@@ -1,4 +1,33 @@
--- data taken from International Education's country summary public database --
+-- This is my first solo project. I'm geeking out about it and really quite proud that it works. --
+-- All data taken from International Education's 'country_summary' public database. I used BigQuery for all SQL queries. --
+
+-- First query the IE database for primary teachers --
+
+SELECT indicator_name, value as primary_teachers, year, country_name, 
+FROM `dark-mark-354801.international_education.international_education` 
+WHERE country_name = 'United States' and 
+  indicator_name = 'Teachers in primary education, both sexes (number)'
+ORDER by year ASC
+
+-- Then get secondary teachers -- 
+
+SELECT indicator_name, value as secondary_teachers, year, country_name, 
+FROM `dark-mark-354801.international_education.international_education` 
+where country_name = 'United States' and 
+  indicator_name = 'Teachers in secondary education, both sexes (number)'
+  ORDER by year ASC
+ 
+-- And finally, the total population of the United States --
+
+SELECT indicator_name, value as population, year, country_name, 
+FROM `dark-mark-354801.international_education.international_education` 
+WHERE country_name = 'United States' AND 
+  indicator_name = 'Population, total'
+  ORDER BY year ASC
+  
+-- The three tables were saved locally as 'primary_teachers', 'secondary_teachers', and 'population' respectively. I'm sure I could have gotten all three in one go, I'll check into that later. -- 
+
+-- Query to calculate the percent of teachers relative to total population --
 
 SELECT
   secondary_teachers.num_teachers + primary_teachers.num_teachers as total_teachers, 
@@ -12,3 +41,16 @@ ON secondary_teachers.year = primary_teachers.year
 JOIN
 US_Teachers.population
 ON secondary_teachers.year = population.year
+
+-- Next potential indicator_name queries: 
+  'Total net enrolment rate, primary, both sexes (%)'
+  'Out-of-school children of primary school age, both sexes (number)'
+  'Annual statutory teacher salaries in public institutions in USD. Primary. Starting salary'
+  'Annual statutory teacher salaries in public institutions in USD. Lower Secondary. Starting salary'
+  'Annual statutory teacher salaries in public institutions in USD. Upper Secondary. Starting salary'
+  'Annual statutory teacher salaries in public institutions in USD. Primary. 15 years of experience'
+  'Annual statutory teacher salaries in public institutions in USD. Lower Secondary. 15 years of experience'
+  'Annual statutory teacher salaries in public institutions in USD. Upper Secondary. 15 years of experience'
+  'Annual statutory teacher salaries in public institutions in USD. Primary. Top of scale'
+  'Annual statutory teacher salaries in public institutions in USD. Lower Secondary. Top of scale'
+  'Annual statutory teacher salaries in public institutions in USD. Upper Secondary. Top of scale' --
