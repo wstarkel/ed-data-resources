@@ -1,0 +1,14 @@
+-- data taken from International Education's country summary public database --
+
+SELECT
+  secondary_teachers.num_teachers + primary_teachers.num_teachers as total_teachers, 
+  population.population,
+  (secondary_teachers.num_teachers + primary_teachers.num_teachers) * 100 / population.population as percent_teachers,
+  primary_teachers.year
+FROM US_Teachers.secondary_teachers
+JOIN 
+US_Teachers.primary_teachers
+ON secondary_teachers.year = primary_teachers.year
+JOIN
+US_Teachers.population
+ON secondary_teachers.year = population.year
